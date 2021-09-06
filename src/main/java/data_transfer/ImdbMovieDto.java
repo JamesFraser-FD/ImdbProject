@@ -1,13 +1,33 @@
+package data_transfer;
+
 import com.opencsv.bean.CsvBindByName;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MovieDto {
+public class ImdbMovieDto {
     private static AtomicInteger idCount = new AtomicInteger(0);
     private final int id;
 
-    public MovieDto() {
+    public ImdbMovieDto() {
         id = idCount.incrementAndGet();
+    }
+
+    public ImdbMovieDto(int id, String title, double score, int year, int duration, String rating, long budget, String[] genres, int gross, String director, String actor1, String actor2, String actor3, String language, String country) {
+        this.id = id;
+        this.title = title;
+        this.score = score;
+        this.year = year;
+        this.duration = duration;
+        this.rating = rating;
+        this.budget = budget;
+        this.genres = genres;
+        this.gross = gross;
+        this.director = director;
+        this.actor1 = actor1;
+        this.actor2 = actor2;
+        this.actor3 = actor3;
+        this.language = language;
+        this.country = country;
     }
 
     @CsvBindByName(column = "title")
@@ -29,7 +49,7 @@ public class MovieDto {
     private long budget;
 
     @CsvBindByName(column = "genres")
-    private String genres;
+    private String[] genres;
 
     @CsvBindByName(column = "gross")
     private int gross;
@@ -81,7 +101,7 @@ public class MovieDto {
     }
 
     public String[] getGenres() {
-        return genres.split("\\|");
+        return genres;//.split("\\|");
     }
 
     public int getGross() {
